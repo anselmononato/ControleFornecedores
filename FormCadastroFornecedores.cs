@@ -28,7 +28,7 @@ namespace CadastroFornecedoresGrupoSym
             btnCadastrarFornecedor.Text = "Cadastrar";
             btnDeletarFornecedor.Enabled = false;
             model.ID = 0;
-
+            this.txtCnpjFornecedor.Mask = "";
         }
 
         private void PopularFornecedores()
@@ -46,7 +46,6 @@ namespace CadastroFornecedoresGrupoSym
         private void btnCadastrarFornecedor_Click(object sender, EventArgs e)
         {
 
-            
             txtCnpjFornecedor.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
             if (txtNomeFantasiaFornecedor.Text != "" && cboTipo.Text != "" & txtCnpjFornecedor.Text.Length == 14)
             {

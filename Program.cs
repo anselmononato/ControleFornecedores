@@ -17,7 +17,7 @@ namespace CadastroFornecedoresGrupoSym
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new FormCadastroFornecedores());
-            Application.Run(new FormCadastroFornecedores());
+            Application.Run(new FormJanelaInicial());
         }
     }
 }
