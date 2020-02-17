@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CadastrosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AssociacaoFornecedor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Empresa_ID" Type="int" Nullable="false" />
+          <Property Name="Fornecedor_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Empresa">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NomeFantasia" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="UF" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="CNPJ" Type="varchar" MaxLength="15" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Fornecedor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="250" />
+          <Property Name="Tipo" Type="varchar" MaxLength="2" />
+          <Property Name="CPF_CNPJ" Type="varchar" MaxLength="15" />
+        </EntityType>
+        <Association Name="FK_AssociacaoFornecedor_Empresa">
+          <End Role="Empresa" Type="Self.Empresa" Multiplicity="1" />
+          <End Role="AssociacaoFornecedor" Type="Self.AssociacaoFornecedor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresa">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AssociacaoFornecedor">
+              <PropertyRef Name="Empresa_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AssociacaoFornecedor_Fornecedor">
+          <End Role="Fornecedor" Type="Self.Fornecedor" Multiplicity="1" />
+          <End Role="AssociacaoFornecedor" Type="Self.AssociacaoFornecedor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fornecedor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AssociacaoFornecedor">
+              <PropertyRef Name="Fornecedor_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CadastrosModelStoreContainer">
+          <EntitySet Name="AssociacaoFornecedor" EntityType="Self.AssociacaoFornecedor" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Empresa" EntityType="Self.Empresa" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fornecedor" EntityType="Self.Fornecedor" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AssociacaoFornecedor_Empresa" Association="Self.FK_AssociacaoFornecedor_Empresa">
+            <End Role="Empresa" EntitySet="Empresa" />
+            <End Role="AssociacaoFornecedor" EntitySet="AssociacaoFornecedor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AssociacaoFornecedor_Fornecedor" Association="Self.FK_AssociacaoFornecedor_Fornecedor">
+            <End Role="Fornecedor" EntitySet="Fornecedor" />
+            <End Role="AssociacaoFornecedor" EntitySet="AssociacaoFornecedor" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CadastrosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AssociacaoFornecedor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Empresa_ID" Type="Int32" Nullable="false" />
+          <Property Name="Fornecedor_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Empresa" Relationship="Self.FK_AssociacaoFornecedor_Empresa" FromRole="AssociacaoFornecedor" ToRole="Empresa" />
+          <NavigationProperty Name="Fornecedor" Relationship="Self.FK_AssociacaoFornecedor_Fornecedor" FromRole="AssociacaoFornecedor" ToRole="Fornecedor" />
+        </EntityType>
+        <EntityType Name="Empresa">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NomeFantasia" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UF" Type="String" MaxLength="2" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CNPJ" Type="String" MaxLength="15" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="AssociacaoFornecedors" Relationship="Self.FK_AssociacaoFornecedor_Empresa" FromRole="Empresa" ToRole="AssociacaoFornecedor" />
+        </EntityType>
+        <EntityType Name="Fornecedor">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nome" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Tipo" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="CPF_CNPJ" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="AssociacaoFornecedors" Relationship="Self.FK_AssociacaoFornecedor_Fornecedor" FromRole="Fornecedor" ToRole="AssociacaoFornecedor" />
+        </EntityType>
+        <Association Name="FK_AssociacaoFornecedor_Empresa">
+          <End Role="Empresa" Type="Self.Empresa" Multiplicity="1" />
+          <End Role="AssociacaoFornecedor" Type="Self.AssociacaoFornecedor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Empresa">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AssociacaoFornecedor">
+              <PropertyRef Name="Empresa_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AssociacaoFornecedor_Fornecedor">
+          <End Role="Fornecedor" Type="Self.Fornecedor" Multiplicity="1" />
+          <End Role="AssociacaoFornecedor" Type="Self.AssociacaoFornecedor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Fornecedor">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="AssociacaoFornecedor">
+              <PropertyRef Name="Fornecedor_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CadastrosDbEntity" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AssociacaoFornecedors" EntityType="Self.AssociacaoFornecedor" />
+          <EntitySet Name="Empresas" EntityType="Self.Empresa" />
+          <EntitySet Name="Fornecedors" EntityType="Self.Fornecedor" />
+          <AssociationSet Name="FK_AssociacaoFornecedor_Empresa" Association="Self.FK_AssociacaoFornecedor_Empresa">
+            <End Role="Empresa" EntitySet="Empresas" />
+            <End Role="AssociacaoFornecedor" EntitySet="AssociacaoFornecedors" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AssociacaoFornecedor_Fornecedor" Association="Self.FK_AssociacaoFornecedor_Fornecedor">
+            <End Role="Fornecedor" EntitySet="Fornecedors" />
+            <End Role="AssociacaoFornecedor" EntitySet="AssociacaoFornecedors" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CadastrosModelStoreContainer" CdmEntityContainer="CadastrosDbEntity">
+          <EntitySetMapping Name="AssociacaoFornecedors">
+            <EntityTypeMapping TypeName="CadastrosModel.AssociacaoFornecedor">
+              <MappingFragment StoreEntitySet="AssociacaoFornecedor">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Empresa_ID" ColumnName="Empresa_ID" />
+                <ScalarProperty Name="Fornecedor_ID" ColumnName="Fornecedor_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Empresas">
+            <EntityTypeMapping TypeName="CadastrosModel.Empresa">
+              <MappingFragment StoreEntitySet="Empresa">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="NomeFantasia" ColumnName="NomeFantasia" />
+                <ScalarProperty Name="UF" ColumnName="UF" />
+                <ScalarProperty Name="CNPJ" ColumnName="CNPJ" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fornecedors">
+            <EntityTypeMapping TypeName="CadastrosModel.Fornecedor">
+              <MappingFragment StoreEntitySet="Fornecedor">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
+                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="CPF_CNPJ" ColumnName="CPF_CNPJ" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
