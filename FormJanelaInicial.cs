@@ -52,21 +52,7 @@ namespace CadastroFornecedoresGrupoSym
         }
 
 
-        // Alimenta o ComboBox 
-        public void loadEmpresaLista()
-        {
-            CadastrosDbEntity db = new CadastrosDbEntity();
-
-            var empresaLista = (from z in db.Empresas
-                        select new { Value = z.ID, Names = z.NomeFantasia }).ToList();
-
-
-            cboEmpresaLista.DataSource = empresaLista;
-            cboEmpresaLista.DisplayMember = "Names";
-            cboEmpresaLista.ValueMember = "Value";
-            cboEmpresaLista.Text = "Selecione Empresa";
-        }
-
+ 
 
         private void empresaToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -92,6 +78,26 @@ namespace CadastroFornecedoresGrupoSym
             PopularFornecedoresInicial(IDFornecedorSelecionado);
         }
 
-       
+
+
+        public void loadEmpresaLista()
+        {
+            CadastrosDbEntity db = new CadastrosDbEntity();
+
+            var empresaLista = (from z in db.Empresas
+                                select new { Value = z.ID, Names = z.NomeFantasia }).ToList();
+
+            cboEmpresaLista.DataSource = empresaLista;
+            cboEmpresaLista.DisplayMember = "Names";
+            cboEmpresaLista.ValueMember = "Value";
+
+            cboEmpresaLista.Text = "Selecione Empresa";
+
+            
+
+        }
     }
+
+
+   
 }

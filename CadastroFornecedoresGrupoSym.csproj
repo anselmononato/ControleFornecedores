@@ -101,6 +101,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CadastrosDbConect.edmx</DependentUpon>
     </Compile>
+    <Compile Include="FormRelacionamento.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormRelacionamento.Designer.cs">
+      <DependentUpon>FormRelacionamento.cs</DependentUpon>
+    </Compile>
     <Compile Include="FuncoesDoSistema.cs" />
     <Compile Include="Empresa.cs">
       <DependentUpon>CadastrosDbConect.tt</DependentUpon>
@@ -136,6 +142,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormCadastroEmpresas.resx">
       <DependentUpon>FormCadastroEmpresas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormRelacionamento.resx">
+      <DependentUpon>FormRelacionamento.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

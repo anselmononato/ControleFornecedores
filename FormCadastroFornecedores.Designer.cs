@@ -37,14 +37,14 @@
             this.btnDeletarFornecedor = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.dgvCadastroFornecedor = new System.Windows.Forms.DataGridView();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NomeFantasia = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UF = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.CNPJ = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label4 = new System.Windows.Forms.Label();
             this.cboTipo = new System.Windows.Forms.ComboBox();
             this.btnFecharCadastroFornecedor = new System.Windows.Forms.Button();
             this.txtCnpjFornecedor = new System.Windows.Forms.MaskedTextBox();
+            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nome = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.CPF_CNPJ = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCadastroFornecedor)).BeginInit();
             this.SuspendLayout();
             // 
@@ -130,9 +130,9 @@
             this.dgvCadastroFornecedor.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCadastroFornecedor.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
-            this.NomeFantasia,
-            this.UF,
-            this.CNPJ});
+            this.Nome,
+            this.Tipo,
+            this.CPF_CNPJ});
             this.dgvCadastroFornecedor.Location = new System.Drawing.Point(281, 27);
             this.dgvCadastroFornecedor.Name = "dgvCadastroFornecedor";
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
@@ -142,35 +142,6 @@
             this.dgvCadastroFornecedor.Size = new System.Drawing.Size(446, 311);
             this.dgvCadastroFornecedor.TabIndex = 14;
             this.dgvCadastroFornecedor.DoubleClick += new System.EventHandler(this.dgvCadastroFornecedor_DoubleClick);
-            // 
-            // ID
-            // 
-            this.ID.DataPropertyName = "ID";
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // NomeFantasia
-            // 
-            this.NomeFantasia.DataPropertyName = "NomeFantasia";
-            this.NomeFantasia.HeaderText = "Nome Fantasia";
-            this.NomeFantasia.Name = "NomeFantasia";
-            this.NomeFantasia.ReadOnly = true;
-            // 
-            // UF
-            // 
-            this.UF.DataPropertyName = "UF";
-            this.UF.HeaderText = "UF";
-            this.UF.Name = "UF";
-            this.UF.ReadOnly = true;
-            // 
-            // CNPJ
-            // 
-            this.CNPJ.DataPropertyName = "CNPJ";
-            this.CNPJ.HeaderText = "CNPJ";
-            this.CNPJ.Name = "CNPJ";
-            this.CNPJ.ReadOnly = true;
             // 
             // label4
             // 
@@ -220,9 +191,39 @@
             this.txtCnpjFornecedor.Name = "txtCnpjFornecedor";
             this.txtCnpjFornecedor.Size = new System.Drawing.Size(161, 20);
             this.txtCnpjFornecedor.TabIndex = 19;
+            this.txtCnpjFornecedor.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.txtCnpjFornecedor_MaskInputRejected);
             this.txtCnpjFornecedor.Enter += new System.EventHandler(this.txtCnpjFornecedor_Enter);
             this.txtCnpjFornecedor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCnpjFornecedor_KeyPress_1);
             this.txtCnpjFornecedor.Leave += new System.EventHandler(this.txtCnpjFornecedor_Leave);
+            // 
+            // ID
+            // 
+            this.ID.DataPropertyName = "ID";
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // Nome
+            // 
+            this.Nome.DataPropertyName = "Nome";
+            this.Nome.HeaderText = "Nome Fantasia";
+            this.Nome.Name = "Nome";
+            this.Nome.ReadOnly = true;
+            // 
+            // Tipo
+            // 
+            this.Tipo.DataPropertyName = "Tipo";
+            this.Tipo.HeaderText = "UF";
+            this.Tipo.Name = "Tipo";
+            this.Tipo.ReadOnly = true;
+            // 
+            // CPF_CNPJ
+            // 
+            this.CPF_CNPJ.DataPropertyName = "CPF_CNPJ";
+            this.CPF_CNPJ.HeaderText = "CNPJ";
+            this.CPF_CNPJ.Name = "CPF_CNPJ";
+            this.CPF_CNPJ.ReadOnly = true;
             // 
             // FormCadastroFornecedores
             // 
@@ -263,12 +264,12 @@
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.DataGridView dgvCadastroFornecedor;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NomeFantasia;
-        private System.Windows.Forms.DataGridViewTextBoxColumn UF;
-        private System.Windows.Forms.DataGridViewTextBoxColumn CNPJ;
         private System.Windows.Forms.ComboBox cboTipo;
         private System.Windows.Forms.Button btnFecharCadastroFornecedor;
         private System.Windows.Forms.MaskedTextBox txtCnpjFornecedor;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nome;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Tipo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn CPF_CNPJ;
     }
 }

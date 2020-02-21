@@ -13,7 +13,7 @@ namespace CadastroFornecedoresGrupoSym
 {
     public partial class FormCadastroFornecedores : Form
     {
-        Fornecedor model = new Fornecedor();
+        private Fornecedor model = new Fornecedor();
         public FormCadastroFornecedores()
         {
             InitializeComponent();
@@ -47,7 +47,7 @@ namespace CadastroFornecedoresGrupoSym
         {
 
             txtCnpjFornecedor.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-            if (txtNomeFantasiaFornecedor.Text != "" && cboTipo.Text != "" & txtCnpjFornecedor.Text.Length == 14)
+            if (txtNomeFantasiaFornecedor.Text != "" && cboTipo.Text != "")
             {
                 model.Nome = txtNomeFantasiaFornecedor.Text.Trim();
                 model.Tipo = cboTipo.Text.Trim();
@@ -206,6 +206,11 @@ namespace CadastroFornecedoresGrupoSym
             //int textLength = this.txtCnpjFornecedor.TextLength;
             this.txtCnpjFornecedor.SelectionStart = this.txtCnpjFornecedor.TextLength;
             this.txtCnpjFornecedor.SelectionLength = 0;
+        }
+
+        private void txtCnpjFornecedor_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
+        {
+
         }
 
 

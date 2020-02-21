@@ -100,6 +100,7 @@
             this.cboEmpresaLista.Name = "cboEmpresaLista";
             this.cboEmpresaLista.Size = new System.Drawing.Size(184, 21);
             this.cboEmpresaLista.TabIndex = 15;
+            
             this.cboEmpresaLista.SelectionChangeCommitted += new System.EventHandler(this.cboEmpresaLista_SelectionChangeCommitted);
             // 
             // menuStrip1
@@ -125,14 +126,14 @@
             // empresaToolStripMenuItem
             // 
             this.empresaToolStripMenuItem.Name = "empresaToolStripMenuItem";
-            this.empresaToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.empresaToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.empresaToolStripMenuItem.Text = "Empresa";
             this.empresaToolStripMenuItem.Click += new System.EventHandler(this.empresaToolStripMenuItem_Click);
             // 
             // fornecedorToolStripMenuItem
             // 
             this.fornecedorToolStripMenuItem.Name = "fornecedorToolStripMenuItem";
-            this.fornecedorToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.fornecedorToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.fornecedorToolStripMenuItem.Text = "Fornecedor";
             this.fornecedorToolStripMenuItem.Click += new System.EventHandler(this.fornecedorToolStripMenuItem_Click);
             // 
