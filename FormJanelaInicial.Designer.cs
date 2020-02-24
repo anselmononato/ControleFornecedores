@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.dgvFEInicial = new System.Windows.Forms.DataGridView();
             this.Nome = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -39,6 +39,8 @@
             this.cadastroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.empresaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fornecedorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.associarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.empresaFornecedorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFEInicial)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -62,13 +64,12 @@
             this.CPF_CNPJ});
             this.dgvFEInicial.Location = new System.Drawing.Point(12, 85);
             this.dgvFEInicial.Name = "dgvFEInicial";
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvFEInicial.RowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvFEInicial.RowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvFEInicial.Size = new System.Drawing.Size(619, 253);
             this.dgvFEInicial.TabIndex = 3;
-            this.dgvFEInicial.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvFEInicial_CellContentClick);
             // 
             // Nome
             // 
@@ -94,19 +95,21 @@
             // 
             // cboEmpresaLista
             // 
-            this.cboEmpresaLista.FormatString = "N2";
+            this.cboEmpresaLista.DisplayMember = "Names";
             this.cboEmpresaLista.FormattingEnabled = true;
             this.cboEmpresaLista.Location = new System.Drawing.Point(88, 58);
             this.cboEmpresaLista.Name = "cboEmpresaLista";
             this.cboEmpresaLista.Size = new System.Drawing.Size(184, 21);
             this.cboEmpresaLista.TabIndex = 15;
-            
+            this.cboEmpresaLista.Text = "Selecione Empresa";
+            this.cboEmpresaLista.ValueMember = "Value";
             this.cboEmpresaLista.SelectionChangeCommitted += new System.EventHandler(this.cboEmpresaLista_SelectionChangeCommitted);
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cadastroToolStripMenuItem});
+            this.cadastroToolStripMenuItem,
+            this.associarToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(643, 24);
@@ -136,6 +139,22 @@
             this.fornecedorToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.fornecedorToolStripMenuItem.Text = "Fornecedor";
             this.fornecedorToolStripMenuItem.Click += new System.EventHandler(this.fornecedorToolStripMenuItem_Click);
+            // 
+            // associarToolStripMenuItem
+            // 
+            this.associarToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.empresaFornecedorToolStripMenuItem});
+            this.associarToolStripMenuItem.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.associarToolStripMenuItem.Name = "associarToolStripMenuItem";
+            this.associarToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
+            this.associarToolStripMenuItem.Text = "Associar";
+            // 
+            // empresaFornecedorToolStripMenuItem
+            // 
+            this.empresaFornecedorToolStripMenuItem.Name = "empresaFornecedorToolStripMenuItem";
+            this.empresaFornecedorToolStripMenuItem.Size = new System.Drawing.Size(193, 22);
+            this.empresaFornecedorToolStripMenuItem.Text = "Empresa > Fornecedor";
+            this.empresaFornecedorToolStripMenuItem.Click += new System.EventHandler(this.empresaFornecedorToolStripMenuItem_Click);
             // 
             // FormJanelaInicial
             // 
@@ -173,6 +192,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Nome;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tipo;
         private System.Windows.Forms.DataGridViewTextBoxColumn CPF_CNPJ;
+        private System.Windows.Forms.ToolStripMenuItem associarToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem empresaFornecedorToolStripMenuItem;
     }
 }
 

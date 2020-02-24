@@ -47,7 +47,7 @@ namespace CadastroFornecedoresGrupoSym
         {
 
             txtCnpjFornecedor.TextMaskFormat = MaskFormat.ExcludePromptAndLiterals;
-            if (txtNomeFantasiaFornecedor.Text != "" && cboTipo.Text != "")
+            if (txtNomeFantasiaFornecedor.Text != "" && cboTipo.Text != "" && validaCPF_CNPJ(txtCnpjFornecedor.Text))
             {
                 model.Nome = txtNomeFantasiaFornecedor.Text.Trim();
                 model.Tipo = cboTipo.Text.Trim();
@@ -168,34 +168,33 @@ namespace CadastroFornecedoresGrupoSym
         }
 
 
-        private object validaCPF_CNPJ(string entrada)
+        private bool validaCPF_CNPJ(string entrada)
         {
             long CNPJ;
-            if (txtCnpjFornecedor.Text.Length == 14)
+            if (txtCnpjFornecedor.Text.Length == 14 && Sirb.Documents.BR.Validation.CNPJ.IsValid(txtCnpjFornecedor.Text))
             {
                 CNPJ =  long.Parse(txtCnpjFornecedor.Text);
                 this.txtCnpjFornecedor.Mask = "99,999,999/9999-99";
                 this.txtCnpjFornecedor.BackColor = default;
                 btnCadastrarFornecedor.Enabled = true;
                 String tipo = cboTipo.Text = "PJ";
+                return true;
             }
-            else if (txtCnpjFornecedor.Text.Length == 11)
+            else if (txtCnpjFornecedor.Text.Length == 11 && Sirb.Documents.BR.Validation.CPF.IsValid(txtCnpjFornecedor.Text))
             {
                 this.txtCnpjFornecedor.Mask = "999,999,999-99";
                 this.txtCnpjFornecedor.BackColor = default;
                 btnCadastrarFornecedor.Enabled = true;
                 cboTipo.Text = "PF";
+                return true;
             }
             else
             {
                 this.txtCnpjFornecedor.Mask = "";
-                //this.txtCnpjFornecedor.Text = "";
                 this.txtCnpjFornecedor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-                btnCadastrarFornecedor.Enabled = false;
                 cboTipo.Text = "";
+                return false;
             }
-
-            return null;
         }
 
         
@@ -206,11 +205,6 @@ namespace CadastroFornecedoresGrupoSym
             //int textLength = this.txtCnpjFornecedor.TextLength;
             this.txtCnpjFornecedor.SelectionStart = this.txtCnpjFornecedor.TextLength;
             this.txtCnpjFornecedor.SelectionLength = 0;
-        }
-
-        private void txtCnpjFornecedor_MaskInputRejected(object sender, MaskInputRejectedEventArgs e)
-        {
-
         }
 
 

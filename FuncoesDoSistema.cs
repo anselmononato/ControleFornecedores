@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace CadastroFornecedoresGrupoSym
 {
@@ -26,21 +27,20 @@ namespace CadastroFornecedoresGrupoSym
         }
 
 
-        public dynamic ListagemFornecedoresSelecionados(int EmpresaID)
-        {
+        public dynamic FornecedoresAssociadosSQL(int EmpresaID)
 
-            
-            var SelectFornecedoresSelecionados = db.Fornecedors.SqlQuery("select  * from Fornecedor where Fornecedor.ID in (select distinct AssociacaoFornecedor.fornecedor_id from AssociacaoFornecedor where Empresa_ID = "+EmpresaID+")")
+        {var SelectFornecedoresSelecionados = db.Fornecedors.SqlQuery("select  * from Fornecedor where Fornecedor.ID in (select distinct AssociacaoFornecedor.fornecedor_id from AssociacaoFornecedor where Empresa_ID = "+EmpresaID+")")
                         .ToList();
-            var ListagemFornecedoresSelecionados = (from z in SelectFornecedoresSelecionados
-                                    select new { IdFornecedor = z.ID, NomeFornecedor = z.Nome }).ToList();
+
+         var ListagemFornecedoresSelecionados = from z in SelectFornecedoresSelecionados
+                                                       select new FornecedorItem { IdFornecedor = z.ID, NomeFornecedor = z.Nome };
 
             return ListagemFornecedoresSelecionados;
 
         }
 
 
-        public dynamic ListagemFornecedoresDisponiveis(int EmpresaID)
+        public dynamic NaoFornecedoresAssociadosSQL(int EmpresaID)
         {
             CadastrosDbEntity db = new CadastrosDbEntity();
 
@@ -48,7 +48,7 @@ namespace CadastroFornecedoresGrupoSym
                         .ToList();
 
             var ListagemFornecedoresDisponiveis = (from z in SelectFornecedoresDisponiveis
-                                    select new { IdFornecedor = z.ID, NomeFornecedor = z.Nome }).ToList();
+                                    select new FornecedorItem { IdFornecedor = z.ID, NomeFornecedor = z.Nome }).ToList();
 
 
             return ListagemFornecedoresDisponiveis;
@@ -56,9 +56,36 @@ namespace CadastroFornecedoresGrupoSym
 
         }
 
+        public void CriaRelacionamento(int _EmpresaIdAssociar, List<int> _FornecedoresIdAssociar)
+        {
+                   
+            List<string> ListaValueToInsert = new List<string>();
+            
+            foreach(int ID in _FornecedoresIdAssociar)
+            {
+                ListaValueToInsert.Add("("+ _EmpresaIdAssociar + "," + ID.ToString() + ")");
+            }
+            string ValueToInsert = String.Join(",", ListaValueToInsert.Select(p => p.ToString()).ToArray());
 
+            CadastrosDbEntity db = new CadastrosDbEntity();
+            string ComandoDelete = "delete AssociacaoFornecedor where Empresa_ID = "+ _EmpresaIdAssociar;
+            string ComandoInsert = "";
+            if (_FornecedoresIdAssociar.Count !=0)
+            {
+                ComandoInsert = "insert into AssociacaoFornecedor (Empresa_ID, Fornecedor_ID) values " + ValueToInsert;
+            }
+            string ComandoExecutar = ComandoDelete + "; " + ComandoInsert;
 
+            db.Database.ExecuteSqlCommand(ComandoExecutar);
 
+        }
+
+        public void PermitirSomenteNumeros(object sender, KeyPressEventArgs e)
+        {
+            //Permitir apenas números no campo de CPF ou CNPJ do cadastro empresa.
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+
+        }
     }
 
 }

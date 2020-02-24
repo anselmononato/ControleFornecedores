@@ -13,7 +13,7 @@ namespace CadastroFornecedoresGrupoSym
 {
     public partial class FormJanelaInicial : Form
     {
-        
+        private readonly FuncoesDoSistema funcoesDoSistema = new FuncoesDoSistema();
         public FormJanelaInicial()
         {
             InitializeComponent();
@@ -21,12 +21,9 @@ namespace CadastroFornecedoresGrupoSym
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            loadEmpresaLista();
-            
+            PopularComboBoxEmpresa();
         }
-
-      
-        void PopularFornecedoresInicial(int IDFornecedorSelecionado)
+        private void PopularFornecedoresInicial(int IDFornecedorSelecionado)
         {
             dgvFEInicial.AutoGenerateColumns = false;
             
@@ -45,59 +42,47 @@ namespace CadastroFornecedoresGrupoSym
             }
 
         }
-
-        private void dgvFEInicial_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
-
- 
-
         private void empresaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormCadastroEmpresas f2 = new FormCadastroEmpresas();
-            f2.ShowDialog();
-            loadEmpresaLista();
+            FormCadastroEmpresas FormCadastroEmpresas = new FormCadastroEmpresas();
+            FormCadastroEmpresas.ShowDialog();
+            PopularComboBoxEmpresa();
             dgvFEInicial.DataSource = null;
         }
-
         private void fornecedorToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormCadastroFornecedores f3 = new FormCadastroFornecedores();
-            f3.ShowDialog();
-            loadEmpresaLista();
+            FormCadastroFornecedores FormCadastroFornecedores = new FormCadastroFornecedores();
+            FormCadastroFornecedores.ShowDialog();
+            PopularComboBoxEmpresa();
             dgvFEInicial.DataSource = null;
         }
-
-
         private void cboEmpresaLista_SelectionChangeCommitted(object sender, EventArgs e)
         {
             bool result = int.TryParse(cboEmpresaLista.SelectedValue.ToString(), out int IDFornecedorSelecionado);
 
             PopularFornecedoresInicial(IDFornecedorSelecionado);
         }
-
-
-
-        public void loadEmpresaLista()
+        public void PopularComboBoxEmpresa()
         {
-            CadastrosDbEntity db = new CadastrosDbEntity();
 
-            var empresaLista = (from z in db.Empresas
-                                select new { Value = z.ID, Names = z.NomeFantasia }).ToList();
+            var Tabelaempresas = funcoesDoSistema.Tabelaempresas(null);
+            var ListagemEmpresa = funcoesDoSistema.ListagemEmpresas(Tabelaempresas);
 
-            cboEmpresaLista.DataSource = empresaLista;
+            cboEmpresaLista.DataSource = ListagemEmpresa;
             cboEmpresaLista.DisplayMember = "Names";
             cboEmpresaLista.ValueMember = "Value";
 
             cboEmpresaLista.Text = "Selecione Empresa";
 
-            
-
         }
+        private void empresaFornecedorToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormRelacionamento formRelacionamento = new FormRelacionamento();
+            formRelacionamento.ShowDialog();
+            //PopularComboBoxEmpresa();
+            dgvFEInicial.DataSource = null;
+        }
+
     }
-
-
    
 }

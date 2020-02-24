@@ -12,150 +12,131 @@ namespace CadastroFornecedoresGrupoSym
 {
     public partial class FormRelacionamento : Form
     {
-
+        private const string Value = "Value";
+        private const string Names = "Names";
         AssociacaoFornecedor model = new AssociacaoFornecedor();
-
-
-
-
-        readonly FuncoesDoSistema funcoesDoSistema = new FuncoesDoSistema();
-
+        private readonly FuncoesDoSistema funcoesDoSistema = new FuncoesDoSistema();
         public FormRelacionamento()
         {
+
             InitializeComponent();
             PopularComboBoxEmpresa();
-            model.Empresa_ID = 1;
-            model.Fornecedor_ID = 10;
-
-            using (CadastrosDbEntity db = new CadastrosDbEntity())
-            {
-                db.AssociacaoFornecedors.Add(model);
-                db.SaveChanges();
-            }
-
         }
-
         public void PopularComboBoxEmpresa()
         {
 
-            var Tabelaempresas = funcoesDoSistema.Tabelaempresas(null);
-            var ListagemEmpresa = funcoesDoSistema.ListagemEmpresas(Tabelaempresas);
-
+            var ListagemEmpresa = this.funcoesDoSistema.ListagemEmpresas(funcoesDoSistema.Tabelaempresas(null));
 
             cboEmpresaLista.DataSource = ListagemEmpresa;
-            cboEmpresaLista.ValueMember = "Value";
-            cboEmpresaLista.DisplayMember = "Names";
-
-
-        }
-
-
-
-        public void PopularCheckedListBoxFornecedoresSelecinados(int IDEmpresaComboBox)
-        {
-
-            clbFornecedoresSelecionados.Items.Clear();
-            var ListagemFornecedoresSelecionados = funcoesDoSistema.ListagemFornecedoresSelecionados(IDEmpresaComboBox);
-            foreach (var item in ListagemFornecedoresSelecionados)
-            {
-                clbFornecedoresSelecionados.Items.Add(item);
-            }
+            cboEmpresaLista.ValueMember = Value;
+            cboEmpresaLista.DisplayMember = Names;
+            cboEmpresaLista.SelectedIndex = -1;
+            cboEmpresaLista.Text = "Selecione Empresa";
 
         }
-
-
         public void PopularCheckedListBoxFornecedoresDisponiveis(int IDEmpresaComboBox)
         {
             clbFornecedoresDisponiveis.Items.Clear();
-            var ListagemFornecedoresDisponiveis = funcoesDoSistema.ListagemFornecedoresDisponiveis(IDEmpresaComboBox);
-            foreach (var item in ListagemFornecedoresDisponiveis)
+            List<FornecedorItem> NaoFornecedoresAssociadosSQL = funcoesDoSistema.NaoFornecedoresAssociadosSQL(IDEmpresaComboBox);
+
+
+
+
+            foreach (FornecedorItem item in NaoFornecedoresAssociadosSQL)
             {
                 clbFornecedoresDisponiveis.Items.Add(item);
             }
         }
-
-
-
-
-
-
-        private void cboEmpresaLista_SelectedIndexChanged(object sender, EventArgs e)
+        public void PopularCheckedListBoxFornecedoresSelecinados(int IDEmpresaComboBox)
         {
 
+            clbFornecedoresSelecionados.Items.Clear();
+            var FornecedoresAssociadosSQL = funcoesDoSistema.FornecedoresAssociadosSQL(IDEmpresaComboBox);
 
+
+            foreach (var item in FornecedoresAssociadosSQL)
+            {
+                clbFornecedoresSelecionados.Items.Add(item);
+            }
+
+        }
+        private void cboEmpresaLista_SelectionChangeCommitted(object sender, EventArgs e)
+        {
             int IdEmpresaSelecionada = Int32.Parse(cboEmpresaLista.SelectedValue.ToString());
-
 
             PopularCheckedListBoxFornecedoresSelecinados(IdEmpresaSelecionada);
             PopularCheckedListBoxFornecedoresDisponiveis(IdEmpresaSelecionada);
-
+            btnDesfazer.Enabled = false;
         }
-
-        private void btnRemoveFornecedores_Click(object sender, EventArgs e)
+        private void BtnRemoveFornecedores_Click(object sender, EventArgs e)
         {
-            var itensSelecionados = clbFornecedoresSelecionados.CheckedItems;
 
-            foreach (var item in itensSelecionados.OfType<object>().ToList())
+            if (clbFornecedoresSelecionados.CheckedItems.Count == 0)
+                MessageBox.Show("Selecione um fornecedor para remover a associação");
+            else
+            {
+                var itensSelecionados = clbFornecedoresSelecionados.CheckedItems;
+                foreach (var item in itensSelecionados.OfType<object>().ToList())
+                {
+
+                    clbFornecedoresDisponiveis.Items.Add(item);
+                    clbFornecedoresSelecionados.Items.Remove(item);
+                }
+                btnDesfazer.Enabled = true;
+            }
+            
+        }
+        private void BtnAdicionaFornecedores_Click(object sender, EventArgs e)
+        {
+            if (clbFornecedoresDisponiveis.CheckedItems.Count == 0)
+                MessageBox.Show("Selecione um fornecedor para adicionar a associação");
+            else
+            {
+                var itensSelecionados = clbFornecedoresDisponiveis.CheckedItems.OfType<object>().ToList();
+                //foreach (var item in itensSelecionados.OfType<object>().ToList())
+                foreach (FornecedorItem item in itensSelecionados)
+                {
+                    clbFornecedoresSelecionados.Items.Add(item);
+                    clbFornecedoresDisponiveis.Items.Remove(item);
+
+                }
+                btnDesfazer.Enabled = true;
+            }
+        }
+        private void BtnGravaAssociacao_Click(object sender, EventArgs e)
+        {
+
+
+            if (MessageBox.Show("Realmente deseja atualizar os dados?", "Confirmar Atualização", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
 
-               clbFornecedoresDisponiveis.Items.Add(item);
-              clbFornecedoresSelecionados.Items.Remove(item);
+
+                var AssociarFornecedores = clbFornecedoresSelecionados.Items;
+                List<int> CriarAssociacaoFornecedoresID = new List<int>();
+                int EmpresaSelecionada = Int32.Parse(cboEmpresaLista.SelectedValue.ToString());
+                foreach (FornecedorItem item in AssociarFornecedores)
+                {
+                    CriarAssociacaoFornecedoresID.Add(item.IdFornecedor);
+                }
+
+
+                funcoesDoSistema.CriaRelacionamento(EmpresaSelecionada, CriarAssociacaoFornecedoresID);
             }
+            else
+                return;
+            btnDesfazer.Enabled = false;
         }
-        private void btnAdicionaFornecedores_Click(object sender, EventArgs e)
+        private void BtnDesfazer_Click(object sender, EventArgs e)
         {
-            var itensSelecionados = clbFornecedoresDisponiveis.CheckedItems;
-
-            foreach (var item in itensSelecionados.OfType<object>().ToList())
-            {
-                clbFornecedoresSelecionados.Items.Add(item);
-                clbFornecedoresDisponiveis.Items.Remove(item);
-                
-            }
+            cboEmpresaLista_SelectionChangeCommitted(null,null);
+            btnDesfazer.Enabled = false;
         }
-
-        private void btnGravaAssociacao_Click(object sender, EventArgs e)
+        private void btnFecharCadastroFornecedor_Click(object sender, EventArgs e)
         {
-
-            var teste = clbFornecedoresSelecionados.Items;
-
-            foreach (Profile item in teste) { 
-            Profile teste2 = (Profile)item;
-
-                int teste3 = teste2.IdFornecedor;
-                //item["IdFornecedor"]
-            }
-
-           
-           
-
-
-
-
-            // { System.Windows.Forms.ListBox.ItemArray.Entry}
+            Close();
         }
-
+     
     }
 
 
-
-    public class Profile
-    {
-       
-
-        public int IdFornecedor
-        {
-            get { return IdFornecedor; }
-            set { IdFornecedor = value; }
-        }
-
-
-        public int NomeFornecedor
-        {
-            get { return NomeFornecedor; }
-            set { NomeFornecedor = value; }
-        }
-
-
-    }
 }

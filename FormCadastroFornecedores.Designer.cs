@@ -37,14 +37,14 @@
             this.btnDeletarFornecedor = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.dgvCadastroFornecedor = new System.Windows.Forms.DataGridView();
-            this.label4 = new System.Windows.Forms.Label();
-            this.cboTipo = new System.Windows.Forms.ComboBox();
-            this.btnFecharCadastroFornecedor = new System.Windows.Forms.Button();
-            this.txtCnpjFornecedor = new System.Windows.Forms.MaskedTextBox();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nome = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Tipo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CPF_CNPJ = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cboTipo = new System.Windows.Forms.ComboBox();
+            this.btnFecharCadastroFornecedor = new System.Windows.Forms.Button();
+            this.txtCnpjFornecedor = new System.Windows.Forms.MaskedTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCadastroFornecedor)).BeginInit();
             this.SuspendLayout();
             // 
@@ -143,6 +143,35 @@
             this.dgvCadastroFornecedor.TabIndex = 14;
             this.dgvCadastroFornecedor.DoubleClick += new System.EventHandler(this.dgvCadastroFornecedor_DoubleClick);
             // 
+            // ID
+            // 
+            this.ID.DataPropertyName = "ID";
+            this.ID.HeaderText = "ID";
+            this.ID.Name = "ID";
+            this.ID.ReadOnly = true;
+            this.ID.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            // 
+            // Nome
+            // 
+            this.Nome.DataPropertyName = "Nome";
+            this.Nome.HeaderText = "Nome Fantasia";
+            this.Nome.Name = "Nome";
+            this.Nome.ReadOnly = true;
+            // 
+            // Tipo
+            // 
+            this.Tipo.DataPropertyName = "Tipo";
+            this.Tipo.HeaderText = "UF";
+            this.Tipo.Name = "Tipo";
+            this.Tipo.ReadOnly = true;
+            // 
+            // CPF_CNPJ
+            // 
+            this.CPF_CNPJ.DataPropertyName = "CPF_CNPJ";
+            this.CPF_CNPJ.HeaderText = "CNPJ";
+            this.CPF_CNPJ.Name = "CPF_CNPJ";
+            this.CPF_CNPJ.ReadOnly = true;
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -158,6 +187,7 @@
             this.cboTipo.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cboTipo.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cboTipo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboTipo.Enabled = false;
             this.cboTipo.FormattingEnabled = true;
             this.cboTipo.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.cboTipo.Items.AddRange(new object[] {
@@ -191,39 +221,9 @@
             this.txtCnpjFornecedor.Name = "txtCnpjFornecedor";
             this.txtCnpjFornecedor.Size = new System.Drawing.Size(161, 20);
             this.txtCnpjFornecedor.TabIndex = 19;
-            this.txtCnpjFornecedor.MaskInputRejected += new System.Windows.Forms.MaskInputRejectedEventHandler(this.txtCnpjFornecedor_MaskInputRejected);
             this.txtCnpjFornecedor.Enter += new System.EventHandler(this.txtCnpjFornecedor_Enter);
             this.txtCnpjFornecedor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCnpjFornecedor_KeyPress_1);
             this.txtCnpjFornecedor.Leave += new System.EventHandler(this.txtCnpjFornecedor_Leave);
-            // 
-            // ID
-            // 
-            this.ID.DataPropertyName = "ID";
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            // 
-            // Nome
-            // 
-            this.Nome.DataPropertyName = "Nome";
-            this.Nome.HeaderText = "Nome Fantasia";
-            this.Nome.Name = "Nome";
-            this.Nome.ReadOnly = true;
-            // 
-            // Tipo
-            // 
-            this.Tipo.DataPropertyName = "Tipo";
-            this.Tipo.HeaderText = "UF";
-            this.Tipo.Name = "Tipo";
-            this.Tipo.ReadOnly = true;
-            // 
-            // CPF_CNPJ
-            // 
-            this.CPF_CNPJ.DataPropertyName = "CPF_CNPJ";
-            this.CPF_CNPJ.HeaderText = "CNPJ";
-            this.CPF_CNPJ.Name = "CPF_CNPJ";
-            this.CPF_CNPJ.ReadOnly = true;
             // 
             // FormCadastroFornecedores
             // 

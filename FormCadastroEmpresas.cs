@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 
@@ -58,13 +53,14 @@ namespace CadastroFornecedoresGrupoSym
                 {
                     if (model.ID == 0)
                         db.Empresas.Add(model);
-                    else
+                    else if (MessageBox.Show("Realmente deseja atualizar os dados?", "Confirmar Atualização", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
-                        if (MessageBox.Show("Realmente deseja atualizar os dados?", "Confirmar Atualização", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                            db.Entry(model).State = System.Data.Entity.EntityState.Modified;
-                        else
-                            return;
+                        db.Entry(model).State = System.Data.Entity.EntityState.Modified;
+                        
                     }
+                    else
+                        return;
+
                     db.SaveChanges();
                 }
 
@@ -76,8 +72,8 @@ namespace CadastroFornecedoresGrupoSym
 
         private void txtCnpjEmpresa_KeyPress(object sender, KeyPressEventArgs e)
         {
-            
-                e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
+            //Permitir apenas números no campo de CPF ou CNPJ do cadastro empresa.
+            e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
             
         }
 
@@ -111,9 +107,6 @@ namespace CadastroFornecedoresGrupoSym
                 {
                     model = db.Empresas.Where(x => x.ID == model.ID).FirstOrDefault();
                     txtCnpjEmpresa.Text = model.CNPJ;
-                    //long longCNPJ = long.Parse(model.CNPJ);
-                    //string CNPJFormatado = String.Format(@"{0:00\.000\.000\/0000\-00}", longCNPJ); //Formatar de Long para CNPJ
-                    //txtCnpjEmpresa.Text = CNPJFormatado;
                     txtNomeFantasiaEmpresa.Text = model.NomeFantasia;
                     cboUf.Text = model.UF;   
                 }
@@ -143,33 +136,11 @@ namespace CadastroFornecedoresGrupoSym
         {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
-                e.Handled = true; // Estudar o que o Handled faz.
+                e.Handled = true; 
 
             }
 
-            //// only allow one decimal point
-            //if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
-            //{
-            //    e.Handled = true;
-            //}
         }
-
-        //private void txtCnpjEmpresa_KeyPress_1(object sender, KeyPressEventArgs e)
-        //{
-
-        //        if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
-        //        {
-        //            e.Handled = true; // Estudar o que o Handled faz.
-
-        //        }
-
-        //        //// only allow one decimal point
-        //        //if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
-        //        //{
-        //        //    e.Handled = true;
-        //        //}
-
-        //}
 
 
     }
