@@ -24,6 +24,7 @@ namespace CadastroFornecedoresGrupoSym
         public string Nome { get; set; }
         public string Tipo { get; set; }
         public string CPF_CNPJ { get; set; }
+        public Nullable<System.DateTime> Nascimento { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AssociacaoFornecedor> AssociacaoFornecedors { get; set; }

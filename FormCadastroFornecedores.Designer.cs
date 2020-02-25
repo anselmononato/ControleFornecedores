@@ -45,6 +45,8 @@
             this.cboTipo = new System.Windows.Forms.ComboBox();
             this.btnFecharCadastroFornecedor = new System.Windows.Forms.Button();
             this.txtCnpjFornecedor = new System.Windows.Forms.MaskedTextBox();
+            this.lbNascimento = new System.Windows.Forms.Label();
+            this.txtNascimento = new System.Windows.Forms.MaskedTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCadastroFornecedor)).BeginInit();
             this.SuspendLayout();
             // 
@@ -57,14 +59,14 @@
             this.btnCadastrarFornecedor.Location = new System.Drawing.Point(20, 172);
             this.btnCadastrarFornecedor.Name = "btnCadastrarFornecedor";
             this.btnCadastrarFornecedor.Size = new System.Drawing.Size(75, 30);
-            this.btnCadastrarFornecedor.TabIndex = 4;
+            this.btnCadastrarFornecedor.TabIndex = 5;
             this.btnCadastrarFornecedor.Text = "Cadastrar";
             this.btnCadastrarFornecedor.UseVisualStyleBackColor = false;
             this.btnCadastrarFornecedor.Click += new System.EventHandler(this.btnCadastrarFornecedor_Click);
             // 
             // txtNomeFantasiaFornecedor
             // 
-            this.txtNomeFantasiaFornecedor.Location = new System.Drawing.Point(101, 68);
+            this.txtNomeFantasiaFornecedor.Location = new System.Drawing.Point(98, 56);
             this.txtNomeFantasiaFornecedor.Name = "txtNomeFantasiaFornecedor";
             this.txtNomeFantasiaFornecedor.Size = new System.Drawing.Size(162, 20);
             this.txtNomeFantasiaFornecedor.TabIndex = 1;
@@ -72,7 +74,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(17, 71);
+            this.label1.Location = new System.Drawing.Point(14, 59);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(78, 13);
             this.label1.TabIndex = 5;
@@ -81,7 +83,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(17, 97);
+            this.label2.Location = new System.Drawing.Point(17, 85);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(28, 13);
             this.label2.TabIndex = 8;
@@ -90,7 +92,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(17, 123);
+            this.label3.Location = new System.Drawing.Point(15, 112);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 13);
             this.label3.TabIndex = 10;
@@ -105,7 +107,7 @@
             this.btnDeletarFornecedor.Location = new System.Drawing.Point(104, 172);
             this.btnDeletarFornecedor.Name = "btnDeletarFornecedor";
             this.btnDeletarFornecedor.Size = new System.Drawing.Size(75, 30);
-            this.btnDeletarFornecedor.TabIndex = 5;
+            this.btnDeletarFornecedor.TabIndex = 6;
             this.btnDeletarFornecedor.Text = "Deletar";
             this.btnDeletarFornecedor.UseVisualStyleBackColor = false;
             this.btnDeletarFornecedor.Click += new System.EventHandler(this.btnDeletarFornecedor_Click);
@@ -119,7 +121,7 @@
             this.btnCancelar.Location = new System.Drawing.Point(187, 172);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 30);
-            this.btnCancelar.TabIndex = 6;
+            this.btnCancelar.TabIndex = 7;
             this.btnCancelar.Text = "Limpar";
             this.btnCancelar.UseVisualStyleBackColor = false;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click_1);
@@ -194,7 +196,7 @@
             "",
             "PJ",
             "PF"});
-            this.cboTipo.Location = new System.Drawing.Point(101, 93);
+            this.cboTipo.Location = new System.Drawing.Point(101, 82);
             this.cboTipo.MaxLength = 2;
             this.cboTipo.Name = "cboTipo";
             this.cboTipo.Size = new System.Drawing.Size(55, 21);
@@ -217,13 +219,34 @@
             // 
             // txtCnpjFornecedor
             // 
-            this.txtCnpjFornecedor.Location = new System.Drawing.Point(101, 120);
+            this.txtCnpjFornecedor.ForeColor = System.Drawing.SystemColors.WindowText;
+            this.txtCnpjFornecedor.Location = new System.Drawing.Point(99, 109);
             this.txtCnpjFornecedor.Name = "txtCnpjFornecedor";
             this.txtCnpjFornecedor.Size = new System.Drawing.Size(161, 20);
-            this.txtCnpjFornecedor.TabIndex = 19;
-            this.txtCnpjFornecedor.Enter += new System.EventHandler(this.txtCnpjFornecedor_Enter);
-            this.txtCnpjFornecedor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCnpjFornecedor_KeyPress_1);
+            this.txtCnpjFornecedor.TabIndex = 3;
+            this.txtCnpjFornecedor.TextChanged += new System.EventHandler(this.txtCnpjFornecedor_TextChanged);
+            this.txtCnpjFornecedor.Enter += new System.EventHandler(this.TxtCnpjFornecedor_Enter);
+            this.txtCnpjFornecedor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCnpjFornecedor_KeyPress);
             this.txtCnpjFornecedor.Leave += new System.EventHandler(this.txtCnpjFornecedor_Leave);
+            // 
+            // lbNascimento
+            // 
+            this.lbNascimento.AutoSize = true;
+            this.lbNascimento.Location = new System.Drawing.Point(14, 138);
+            this.lbNascimento.Name = "lbNascimento";
+            this.lbNascimento.Size = new System.Drawing.Size(77, 13);
+            this.lbNascimento.TabIndex = 21;
+            this.lbNascimento.Text = "D. Nascimento";
+            this.lbNascimento.Visible = false;
+            // 
+            // txtNascimento
+            // 
+            this.txtNascimento.Location = new System.Drawing.Point(100, 135);
+            this.txtNascimento.Name = "txtNascimento";
+            this.txtNascimento.Size = new System.Drawing.Size(161, 20);
+            this.txtNascimento.TabIndex = 4;
+            this.txtNascimento.Visible = false;
+            this.txtNascimento.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtNascimento_KeyUp);
             // 
             // FormCadastroFornecedores
             // 
@@ -231,6 +254,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SteelBlue;
             this.ClientSize = new System.Drawing.Size(739, 350);
+            this.Controls.Add(this.txtNascimento);
+            this.Controls.Add(this.lbNascimento);
             this.Controls.Add(this.txtCnpjFornecedor);
             this.Controls.Add(this.btnFecharCadastroFornecedor);
             this.Controls.Add(this.cboTipo);
@@ -271,5 +296,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Nome;
         private System.Windows.Forms.DataGridViewTextBoxColumn Tipo;
         private System.Windows.Forms.DataGridViewTextBoxColumn CPF_CNPJ;
+        private System.Windows.Forms.Label lbNascimento;
+        private System.Windows.Forms.MaskedTextBox txtNascimento;
     }
 }

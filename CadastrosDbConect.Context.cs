@@ -25,8 +25,8 @@ namespace CadastroFornecedoresGrupoSym
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<AssociacaoFornecedor> AssociacaoFornecedors { get; set; }
-        public virtual DbSet<Empresa> Empresas { get; set; }
-        public virtual DbSet<Fornecedor> Fornecedors { get; set; }
+        public virtual DbSet<AssociacaoFornecedor> AssociacaoFornecedor { get; set; }
+        public virtual DbSet<Empresa> Empresa { get; set; }
+        public virtual DbSet<Fornecedor> Fornecedor { get; set; }
     }
 }

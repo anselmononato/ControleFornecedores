@@ -9,11 +9,12 @@ namespace CadastroFornecedoresGrupoSym
 {
     class FuncoesDoSistema
     {
+
         CadastrosDbEntity db = new CadastrosDbEntity();
         public List<Empresa> Tabelaempresas(string Condicao)
         {
             string CondicoesEmpresas = null;
-            var TabelaEmpresas = db.Empresas.SqlQuery("select * from Empresa"+ CondicoesEmpresas).ToList();
+            var TabelaEmpresas = db.Empresa.SqlQuery("select * from Empresa"+ CondicoesEmpresas).ToList();
 
             return TabelaEmpresas;
         }
@@ -26,10 +27,9 @@ namespace CadastroFornecedoresGrupoSym
             return RetornoEmpresas;
         }
 
-
         public dynamic FornecedoresAssociadosSQL(int EmpresaID)
 
-        {var SelectFornecedoresSelecionados = db.Fornecedors.SqlQuery("select  * from Fornecedor where Fornecedor.ID in (select distinct AssociacaoFornecedor.fornecedor_id from AssociacaoFornecedor where Empresa_ID = "+EmpresaID+")")
+        {var SelectFornecedoresSelecionados = db.Fornecedor.SqlQuery("select  * from Fornecedor where Fornecedor.ID in (select distinct AssociacaoFornecedor.fornecedor_id from AssociacaoFornecedor where Empresa_ID = "+EmpresaID+")")
                         .ToList();
 
          var ListagemFornecedoresSelecionados = from z in SelectFornecedoresSelecionados
@@ -39,12 +39,11 @@ namespace CadastroFornecedoresGrupoSym
 
         }
 
-
         public dynamic NaoFornecedoresAssociadosSQL(int EmpresaID)
         {
             CadastrosDbEntity db = new CadastrosDbEntity();
 
-            var SelectFornecedoresDisponiveis = db.Fornecedors.SqlQuery("select  * from Fornecedor where Fornecedor.ID not in (select AssociacaoFornecedor.fornecedor_id from AssociacaoFornecedor where Empresa_ID = "+ EmpresaID+ ")")
+            var SelectFornecedoresDisponiveis = db.Fornecedor.SqlQuery("select  * from Fornecedor where Fornecedor.ID not in (select AssociacaoFornecedor.fornecedor_id from AssociacaoFornecedor where Empresa_ID = "+ EmpresaID+ ")")
                         .ToList();
 
             var ListagemFornecedoresDisponiveis = (from z in SelectFornecedoresDisponiveis
@@ -85,6 +84,21 @@ namespace CadastroFornecedoresGrupoSym
             //Permitir apenas números no campo de CPF ou CNPJ do cadastro empresa.
             e.Handled = !char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar);
 
+        }
+    
+        public bool ValidaIdade(string nascimento)
+        {
+
+          //  int teste = nascimento.Length;
+            if (nascimento.Length == 10
+                && DateTime.TryParse(nascimento, out DateTime DataConvertida) 
+                && DataConvertida.AddYears(18) < DateTime.Now
+                && DataConvertida.AddYears(500) > DateTime.Now)
+            {
+                return true;
+            }
+           
+            return false;
         }
     }
 

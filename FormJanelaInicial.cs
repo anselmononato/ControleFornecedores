@@ -32,7 +32,7 @@ namespace CadastroFornecedoresGrupoSym
                 if (IDFornecedorSelecionado.ToString() != "")
                 {
                    
-                    var listaFornecedores = db.Fornecedors.SqlQuery("SELECT F.* FROM dbo.Fornecedor F " +
+                    var listaFornecedores = db.Fornecedor.SqlQuery("SELECT F.* FROM dbo.Fornecedor F " +
                         "INNER JOIN dbo.AssociacaoFornecedor AF on (AF.Fornecedor_ID = F.ID) " +
                         "INNER JOIN dbo.Empresa E on (E.ID = AF.Empresa_ID)  " +
                         "WHERE E.ID in (" + IDFornecedorSelecionado + ") ")
@@ -79,7 +79,6 @@ namespace CadastroFornecedoresGrupoSym
         {
             FormRelacionamento formRelacionamento = new FormRelacionamento();
             formRelacionamento.ShowDialog();
-            //PopularComboBoxEmpresa();
             dgvFEInicial.DataSource = null;
         }
 

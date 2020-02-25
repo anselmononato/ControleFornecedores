@@ -200,6 +200,7 @@
       <DependentUpon>CadastrosDbConect.edmx</DependentUpon>
       <LastGenOutput>CadastrosDbConect.Context.cs</LastGenOutput>
     </Content>
+    <Content Include="CadastrosDbConect.edmx.sql" />
     <Content Include="CadastrosDbConect.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>CadastrosDbConect.edmx</DependentUpon>

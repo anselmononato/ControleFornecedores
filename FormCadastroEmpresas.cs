@@ -32,7 +32,7 @@ namespace CadastroFornecedoresGrupoSym
             dgvCadastroEmpresa.AutoGenerateColumns = false;
             using (CadastrosDbEntity Db = new CadastrosDbEntity())
             {
-                dgvCadastroEmpresa.DataSource = Db.Empresas.ToList<Empresa>();
+                dgvCadastroEmpresa.DataSource = Db.Empresa.ToList<Empresa>();
 
             }
 
@@ -52,7 +52,7 @@ namespace CadastroFornecedoresGrupoSym
                 using (CadastrosDbEntity db = new CadastrosDbEntity())
                 {
                     if (model.ID == 0)
-                        db.Empresas.Add(model);
+                        db.Empresa.Add(model);
                     else if (MessageBox.Show("Realmente deseja atualizar os dados?", "Confirmar Atualização", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
                         db.Entry(model).State = System.Data.Entity.EntityState.Modified;
@@ -105,7 +105,7 @@ namespace CadastroFornecedoresGrupoSym
 
                 using (CadastrosDbEntity db = new CadastrosDbEntity())
                 {
-                    model = db.Empresas.Where(x => x.ID == model.ID).FirstOrDefault();
+                    model = db.Empresa.Where(x => x.ID == model.ID).FirstOrDefault();
                     txtCnpjEmpresa.Text = model.CNPJ;
                     txtNomeFantasiaEmpresa.Text = model.NomeFantasia;
                     cboUf.Text = model.UF;   
@@ -124,8 +124,8 @@ namespace CadastroFornecedoresGrupoSym
                 {
                     var entry = db.Entry(model);
                 if (entry.State == System.Data.Entity.EntityState.Detached)
-                    db.Empresas.Attach(model);
-                db.Empresas.Remove(model);
+                    db.Empresa.Attach(model);
+                db.Empresa.Remove(model);
                 db.SaveChanges();
                 limpar();
                 }
