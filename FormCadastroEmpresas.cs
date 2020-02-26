@@ -2,17 +2,25 @@
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
-
+using System.Text.RegularExpressions;
+using System.Drawing;
 
 namespace CadastroFornecedoresGrupoSym
 {
     public partial class FormCadastroEmpresas : Form
     {
         Empresa model = new Empresa();
+        Color colorInvalidated = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+        Color colorValidated = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+
+
         public FormCadastroEmpresas()
         {
-            InitializeComponent();
-            limpar();
+
+
+       
+        InitializeComponent();
+        limpar();
         }
 
         void limpar()
@@ -142,6 +150,25 @@ namespace CadastroFornecedoresGrupoSym
 
         }
 
+        private void txtCnpjEmpresa_TextChanged(object sender, EventArgs e)
+        {
+            Regex pattern = new Regex(@"[^\d]");
+            string teste = pattern.Replace(txtCnpjEmpresa.Text, "");
 
+            if (Sirb.Documents.BR.Validation.CNPJ.IsValid(teste))
+            {
+
+                txtCnpjEmpresa.BackColor = colorValidated;
+                btnCadastrarEmpresa.Enabled = true;
+               
+            }
+
+            else
+            {
+                txtCnpjEmpresa.BackColor = colorInvalidated;
+                btnCadastrarEmpresa.Enabled = false;
+
+            }
+        }
     }
 }

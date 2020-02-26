@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace CadastroFornecedoresGrupoSym
 {
     static class Program
@@ -12,7 +13,10 @@ namespace CadastroFornecedoresGrupoSym
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
+       
+
+
+        Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new FormJanelaInicial());
             

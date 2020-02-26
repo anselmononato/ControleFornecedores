@@ -65,7 +65,7 @@ namespace CadastroFornecedoresGrupoSym
         public void PopularComboBoxEmpresa()
         {
 
-            var Tabelaempresas = funcoesDoSistema.Tabelaempresas(null);
+            List<Empresa> Tabelaempresas = funcoesDoSistema.Tabelaempresas(null);
             var ListagemEmpresa = funcoesDoSistema.ListagemEmpresas(Tabelaempresas);
 
             cboEmpresaLista.DataSource = ListagemEmpresa;

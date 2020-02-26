@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.btnCadastrarEmpresa = new System.Windows.Forms.Button();
             this.txtNomeFantasiaEmpresa = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -135,10 +135,10 @@
             this.CNPJ});
             this.dgvCadastroEmpresa.Location = new System.Drawing.Point(281, 27);
             this.dgvCadastroEmpresa.Name = "dgvCadastroEmpresa";
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.Color.Black;
-            this.dgvCadastroEmpresa.RowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Black;
+            this.dgvCadastroEmpresa.RowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvCadastroEmpresa.Size = new System.Drawing.Size(446, 311);
             this.dgvCadastroEmpresa.TabIndex = 14;
             this.dgvCadastroEmpresa.DoubleClick += new System.EventHandler(this.dgvCadastroEmpresa_DoubleClick);
@@ -245,7 +245,8 @@
             this.txtCnpjEmpresa.Mask = "99,999,999/9999-99";
             this.txtCnpjEmpresa.Name = "txtCnpjEmpresa";
             this.txtCnpjEmpresa.Size = new System.Drawing.Size(161, 20);
-            this.txtCnpjEmpresa.TabIndex = 19;
+            this.txtCnpjEmpresa.TabIndex = 3;
+            this.txtCnpjEmpresa.TextChanged += new System.EventHandler(this.txtCnpjEmpresa_TextChanged);
             this.txtCnpjEmpresa.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCnpjEmpresa_KeyPress_1);
             // 
             // FormCadastroEmpresas

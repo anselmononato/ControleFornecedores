@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 namespace CadastroFornecedoresGrupoSym
 {
 
-    public class FornecedorItem
+    public class ClasseFornecedor
     {
+
+
         private int _IdFornecedor;
-        string _NomeFornecedor;
+        private string _NomeFornecedor;
 
         public int IdFornecedor
         {
@@ -24,5 +26,7 @@ namespace CadastroFornecedoresGrupoSym
             set { _NomeFornecedor = value; }
         }
     }
+
+
 
 }

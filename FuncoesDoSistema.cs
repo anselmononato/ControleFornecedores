@@ -5,16 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace CadastroFornecedoresGrupoSym
 {
     class FuncoesDoSistema
     {
-
-        CadastrosDbEntity db = new CadastrosDbEntity();
+        private readonly CadastrosDbEntity db = new CadastrosDbEntity();
         public List<Empresa> Tabelaempresas(string Condicao)
         {
-            string CondicoesEmpresas = null;
-            var TabelaEmpresas = db.Empresa.SqlQuery("select * from Empresa"+ CondicoesEmpresas).ToList();
+            
+            List<Empresa> TabelaEmpresas = db.Empresa.SqlQuery("select * from Empresa"+ Condicao).ToList();
 
             return TabelaEmpresas;
         }
@@ -27,27 +27,28 @@ namespace CadastroFornecedoresGrupoSym
             return RetornoEmpresas;
         }
 
-        public dynamic FornecedoresAssociadosSQL(int EmpresaID)
+        public List<ClasseFornecedor> FornecedoresAssociadosSQL(int EmpresaID)
 
-        {var SelectFornecedoresSelecionados = db.Fornecedor.SqlQuery("select  * from Fornecedor where Fornecedor.ID in (select distinct AssociacaoFornecedor.fornecedor_id from AssociacaoFornecedor where Empresa_ID = "+EmpresaID+")")
+        {
+            List<Fornecedor> SelectFornecedoresSelecionados = db.Fornecedor.SqlQuery("select  * from Fornecedor where Fornecedor.ID in (select distinct AssociacaoFornecedor.fornecedor_id from AssociacaoFornecedor where Empresa_ID = " + EmpresaID + ")")
                         .ToList();
 
-         var ListagemFornecedoresSelecionados = from z in SelectFornecedoresSelecionados
-                                                       select new FornecedorItem { IdFornecedor = z.ID, NomeFornecedor = z.Nome };
+            List<ClasseFornecedor> ListagemFornecedoresSelecionados = (from z in SelectFornecedoresSelecionados
+                                                       select new ClasseFornecedor { IdFornecedor = z.ID, NomeFornecedor = z.Nome }).ToList();
 
             return ListagemFornecedoresSelecionados;
 
         }
 
-        public dynamic NaoFornecedoresAssociadosSQL(int EmpresaID)
+        public List<ClasseFornecedor> NaoFornecedoresAssociadosSQL(int EmpresaID)
         {
             CadastrosDbEntity db = new CadastrosDbEntity();
 
-            var SelectFornecedoresDisponiveis = db.Fornecedor.SqlQuery("select  * from Fornecedor where Fornecedor.ID not in (select AssociacaoFornecedor.fornecedor_id from AssociacaoFornecedor where Empresa_ID = "+ EmpresaID+ ")")
+            List<Fornecedor> SelectFornecedoresDisponiveis = db.Fornecedor.SqlQuery("select  * from Fornecedor where Fornecedor.ID not in (select AssociacaoFornecedor.fornecedor_id from AssociacaoFornecedor where Empresa_ID = "+ EmpresaID+ ")")
                         .ToList();
 
-            var ListagemFornecedoresDisponiveis = (from z in SelectFornecedoresDisponiveis
-                                    select new FornecedorItem { IdFornecedor = z.ID, NomeFornecedor = z.Nome }).ToList();
+            List<ClasseFornecedor> ListagemFornecedoresDisponiveis = (from z in SelectFornecedoresDisponiveis
+                                    select new ClasseFornecedor { IdFornecedor = z.ID, NomeFornecedor = z.Nome }).ToList();
 
 
             return ListagemFornecedoresDisponiveis;

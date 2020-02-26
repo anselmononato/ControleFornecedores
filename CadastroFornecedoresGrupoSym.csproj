@@ -107,7 +107,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CadastrosDbConect.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Classes.cs" />
+    <Compile Include="ClasseFornecedor.cs" />
     <Compile Include="FormRelacionamento.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -167,7 +167,6 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>CadastrosDbConect.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="CadastroFornecedoresGrupoSym_TemporaryKey.pfx" />
     <None Include="CadastrosDbConect.edmx.diagram">
       <DependentUpon>CadastrosDbConect.edmx</DependentUpon>
     </None>
@@ -218,6 +217,11 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Classes\" />
+    <Folder Include="Entity\" />
+    <Folder Include="Forms\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

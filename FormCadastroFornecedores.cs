@@ -93,15 +93,7 @@ namespace CadastroFornecedoresGrupoSym
         private void btnFecharCadastroFornecedor_Click(object sender, EventArgs e)
         {
 
-
             Close();
-
-
-           
-
-           
-           
-
             
         }
 

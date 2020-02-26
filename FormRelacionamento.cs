@@ -14,6 +14,7 @@ namespace CadastroFornecedoresGrupoSym
     {
         private const string Value = "Value";
         private const string Names = "Names";
+
         AssociacaoFornecedor model = new AssociacaoFornecedor();
         private readonly FuncoesDoSistema funcoesDoSistema = new FuncoesDoSistema();
         public FormRelacionamento()
@@ -32,17 +33,17 @@ namespace CadastroFornecedoresGrupoSym
             cboEmpresaLista.DisplayMember = Names;
             cboEmpresaLista.SelectedIndex = -1;
             cboEmpresaLista.Text = "Selecione Empresa";
-
+            btnGravaAssociacao.Enabled = false;
         }
         public void PopularCheckedListBoxFornecedoresDisponiveis(int IDEmpresaComboBox)
         {
             clbFornecedoresDisponiveis.Items.Clear();
-            List<FornecedorItem> NaoFornecedoresAssociadosSQL = funcoesDoSistema.NaoFornecedoresAssociadosSQL(IDEmpresaComboBox);
+            List<ClasseFornecedor> NaoFornecedoresAssociadosSQL = funcoesDoSistema.NaoFornecedoresAssociadosSQL(IDEmpresaComboBox);
 
 
 
 
-            foreach (FornecedorItem item in NaoFornecedoresAssociadosSQL)
+            foreach (ClasseFornecedor item in NaoFornecedoresAssociadosSQL)
             {
                 clbFornecedoresDisponiveis.Items.Add(item);
             }
@@ -66,7 +67,7 @@ namespace CadastroFornecedoresGrupoSym
 
             PopularCheckedListBoxFornecedoresSelecinados(IdEmpresaSelecionada);
             PopularCheckedListBoxFornecedoresDisponiveis(IdEmpresaSelecionada);
-            btnDesfazer.Enabled = false;
+            btnDesfazer.Enabled = btnGravaAssociacao.Enabled = false;
         }
         private void BtnRemoveFornecedores_Click(object sender, EventArgs e)
         {
@@ -82,7 +83,8 @@ namespace CadastroFornecedoresGrupoSym
                     clbFornecedoresDisponiveis.Items.Add(item);
                     clbFornecedoresSelecionados.Items.Remove(item);
                 }
-                btnDesfazer.Enabled = true;
+                btnDesfazer.Enabled = btnGravaAssociacao.Enabled = true;
+                
             }
             
         }
@@ -94,27 +96,34 @@ namespace CadastroFornecedoresGrupoSym
             {
                 var itensSelecionados = clbFornecedoresDisponiveis.CheckedItems.OfType<object>().ToList();
                 //foreach (var item in itensSelecionados.OfType<object>().ToList())
-                foreach (FornecedorItem item in itensSelecionados)
+                foreach (ClasseFornecedor item in itensSelecionados)
                 {
                     clbFornecedoresSelecionados.Items.Add(item);
                     clbFornecedoresDisponiveis.Items.Remove(item);
 
                 }
-                btnDesfazer.Enabled = true;
+                btnDesfazer.Enabled = btnGravaAssociacao.Enabled = true;
+               
             }
         }
         private void BtnGravaAssociacao_Click(object sender, EventArgs e)
         {
+            if(cboEmpresaLista.SelectedIndex < 0)
+            {
+                MessageBox.Show("Selecione uma empresa para associar");
+                return;
+            }
 
 
             if (MessageBox.Show("Realmente deseja atualizar os dados?", "Confirmar Atualização", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-
+                
+                //DateTime.TryParse(txtNascimento.Text.Trim(), out DateTime dataNascimento);
 
                 var AssociarFornecedores = clbFornecedoresSelecionados.Items;
                 List<int> CriarAssociacaoFornecedoresID = new List<int>();
-                int EmpresaSelecionada = Int32.Parse(cboEmpresaLista.SelectedValue.ToString());
-                foreach (FornecedorItem item in AssociarFornecedores)
+                Int32.TryParse(cboEmpresaLista.SelectedValue.ToString(), out int EmpresaSelecionada);
+                foreach (ClasseFornecedor item in AssociarFornecedores)
                 {
                     CriarAssociacaoFornecedoresID.Add(item.IdFornecedor);
                 }
@@ -124,12 +133,12 @@ namespace CadastroFornecedoresGrupoSym
             }
             else
                 return;
-            btnDesfazer.Enabled = false;
+            btnDesfazer.Enabled = btnGravaAssociacao.Enabled = false;
         }
         private void BtnDesfazer_Click(object sender, EventArgs e)
         {
             cboEmpresaLista_SelectionChangeCommitted(null,null);
-            btnDesfazer.Enabled = false;
+            btnDesfazer.Enabled = btnGravaAssociacao.Enabled = false;
         }
         private void btnFecharCadastroFornecedor_Click(object sender, EventArgs e)
         {
