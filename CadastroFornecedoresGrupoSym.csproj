@@ -89,68 +89,68 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AssociacaoFornecedor.cs">
+    <Compile Include="Entity\AssociacaoFornecedor.cs">
       <DependentUpon>CadastrosDbConect.tt</DependentUpon>
     </Compile>
-    <Compile Include="CadastrosDbConect.Context.cs">
+    <Compile Include="Entity\CadastrosDbConect.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CadastrosDbConect.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="CadastrosDbConect.cs">
+    <Compile Include="Entity\CadastrosDbConect.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CadastrosDbConect.tt</DependentUpon>
     </Compile>
-    <Compile Include="CadastrosDbConect.Designer.cs">
+    <Compile Include="Entity\CadastrosDbConect.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>CadastrosDbConect.edmx</DependentUpon>
     </Compile>
-    <Compile Include="ClassesDeListagem.cs" />
-    <Compile Include="FormRelacionamento.cs">
+    <Compile Include="Classes\ClassesDeListagem.cs" />
+    <Compile Include="Forms\FormRelacionamento.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormRelacionamento.Designer.cs">
+    <Compile Include="Forms\FormRelacionamento.Designer.cs">
       <DependentUpon>FormRelacionamento.cs</DependentUpon>
     </Compile>
-    <Compile Include="FuncoesDoSistema.cs" />
-    <Compile Include="Empresa.cs">
+    <Compile Include="Classes\FuncoesDoSistema.cs" />
+    <Compile Include="Entity\Empresa.cs">
       <DependentUpon>CadastrosDbConect.tt</DependentUpon>
     </Compile>
-    <Compile Include="FormCadastroFornecedores.cs">
+    <Compile Include="Forms\FormCadastroFornecedores.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormCadastroFornecedores.Designer.cs">
+    <Compile Include="Forms\FormCadastroFornecedores.Designer.cs">
       <DependentUpon>FormCadastroFornecedores.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormJanelaInicial.cs">
+    <Compile Include="Forms\FormJanelaInicial.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormJanelaInicial.Designer.cs">
+    <Compile Include="Forms\FormJanelaInicial.Designer.cs">
       <DependentUpon>FormJanelaInicial.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormCadastroEmpresas.cs">
+    <Compile Include="Forms\FormCadastroEmpresas.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormCadastroEmpresas.Designer.cs">
+    <Compile Include="Forms\FormCadastroEmpresas.Designer.cs">
       <DependentUpon>FormCadastroEmpresas.cs</DependentUpon>
     </Compile>
-    <Compile Include="Fornecedor.cs">
+    <Compile Include="Entity\Fornecedor.cs">
       <DependentUpon>CadastrosDbConect.tt</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="FormCadastroFornecedores.resx">
+    <EmbeddedResource Include="Forms\FormCadastroFornecedores.resx">
       <DependentUpon>FormCadastroFornecedores.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormJanelaInicial.resx">
+    <EmbeddedResource Include="Forms\FormJanelaInicial.resx">
       <DependentUpon>FormJanelaInicial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormCadastroEmpresas.resx">
+    <EmbeddedResource Include="Forms\FormCadastroEmpresas.resx">
       <DependentUpon>FormCadastroEmpresas.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FormRelacionamento.resx">
+    <EmbeddedResource Include="Forms\FormRelacionamento.resx">
       <DependentUpon>FormRelacionamento.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -163,11 +163,11 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EntityDeploy Include="CadastrosDbConect.edmx">
+    <EntityDeploy Include="Entity\CadastrosDbConect.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>CadastrosDbConect.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="CadastrosDbConect.edmx.diagram">
+    <None Include="Entity\CadastrosDbConect.edmx.diagram">
       <DependentUpon>CadastrosDbConect.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
@@ -194,13 +194,13 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CadastrosDbConect.Context.tt">
+    <Content Include="Entity\CadastrosDbConect.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>CadastrosDbConect.edmx</DependentUpon>
       <LastGenOutput>CadastrosDbConect.Context.cs</LastGenOutput>
     </Content>
     <Content Include="CadastrosDbConect.edmx.sql" />
-    <Content Include="CadastrosDbConect.tt">
+    <Content Include="Entity\CadastrosDbConect.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>CadastrosDbConect.edmx</DependentUpon>
       <LastGenOutput>CadastrosDbConect.cs</LastGenOutput>
@@ -218,10 +218,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Classes\" />
-    <Folder Include="Entity\" />
-    <Folder Include="Forms\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

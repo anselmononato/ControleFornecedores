@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CadastroFornecedoresGrupoSym
+namespace CadastroFornecedoresGrupoSym.Entity
 {
     using System;
     using System.Data.Entity;

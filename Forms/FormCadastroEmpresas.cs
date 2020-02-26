@@ -4,8 +4,10 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Text.RegularExpressions;
 using System.Drawing;
+using CadastroFornecedoresGrupoSym.Entity;
 
 namespace CadastroFornecedoresGrupoSym
+
 {
     public partial class FormCadastroEmpresas : Form
     {

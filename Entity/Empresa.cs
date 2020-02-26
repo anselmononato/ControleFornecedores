@@ -7,24 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CadastroFornecedoresGrupoSym
+namespace CadastroFornecedoresGrupoSym.Entity
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Fornecedor
+    public partial class Empresa
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Fornecedor()
+        public Empresa()
         {
             this.AssociacaoFornecedors = new HashSet<AssociacaoFornecedor>();
         }
     
         public int ID { get; set; }
-        public string Nome { get; set; }
-        public string Tipo { get; set; }
-        public string CPF_CNPJ { get; set; }
-        public Nullable<System.DateTime> Nascimento { get; set; }
+        public string NomeFantasia { get; set; }
+        public string UF { get; set; }
+        public string CNPJ { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AssociacaoFornecedor> AssociacaoFornecedors { get; set; }
