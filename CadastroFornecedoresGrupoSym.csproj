@@ -107,7 +107,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>CadastrosDbConect.edmx</DependentUpon>
     </Compile>
-    <Compile Include="ClasseFornecedor.cs" />
+    <Compile Include="ClassesDeListagem.cs" />
     <Compile Include="FormRelacionamento.cs">
       <SubType>Form</SubType>
     </Compile>

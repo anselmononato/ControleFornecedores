@@ -38,12 +38,12 @@ namespace CadastroFornecedoresGrupoSym
         public void PopularCheckedListBoxFornecedoresDisponiveis(int IDEmpresaComboBox)
         {
             clbFornecedoresDisponiveis.Items.Clear();
-            List<ClasseFornecedor> NaoFornecedoresAssociadosSQL = funcoesDoSistema.NaoFornecedoresAssociadosSQL(IDEmpresaComboBox);
+            List<ClassesDeListagem> NaoFornecedoresAssociadosSQL = funcoesDoSistema.NaoFornecedoresAssociadosSQL(IDEmpresaComboBox);
 
 
 
 
-            foreach (ClasseFornecedor item in NaoFornecedoresAssociadosSQL)
+            foreach (ClassesDeListagem item in NaoFornecedoresAssociadosSQL)
             {
                 clbFornecedoresDisponiveis.Items.Add(item);
             }
@@ -96,7 +96,7 @@ namespace CadastroFornecedoresGrupoSym
             {
                 var itensSelecionados = clbFornecedoresDisponiveis.CheckedItems.OfType<object>().ToList();
                 //foreach (var item in itensSelecionados.OfType<object>().ToList())
-                foreach (ClasseFornecedor item in itensSelecionados)
+                foreach (ClassesDeListagem item in itensSelecionados)
                 {
                     clbFornecedoresSelecionados.Items.Add(item);
                     clbFornecedoresDisponiveis.Items.Remove(item);
@@ -123,7 +123,7 @@ namespace CadastroFornecedoresGrupoSym
                 var AssociarFornecedores = clbFornecedoresSelecionados.Items;
                 List<int> CriarAssociacaoFornecedoresID = new List<int>();
                 Int32.TryParse(cboEmpresaLista.SelectedValue.ToString(), out int EmpresaSelecionada);
-                foreach (ClasseFornecedor item in AssociarFornecedores)
+                foreach (ClassesDeListagem item in AssociarFornecedores)
                 {
                     CriarAssociacaoFornecedoresID.Add(item.IdFornecedor);
                 }

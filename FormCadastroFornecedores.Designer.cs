@@ -246,7 +246,7 @@
             this.txtNascimento.Size = new System.Drawing.Size(161, 20);
             this.txtNascimento.TabIndex = 4;
             this.txtNascimento.Visible = false;
-            this.txtNascimento.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtNascimento_KeyUp);
+            this.txtNascimento.TextChanged += new System.EventHandler(this.txtNascimento_TextChanged);
             // 
             // FormCadastroFornecedores
             // 

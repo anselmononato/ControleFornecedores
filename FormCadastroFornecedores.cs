@@ -27,7 +27,7 @@ namespace CadastroFornecedoresGrupoSym
         {
             PopularFornecedores();
 
-            txtCnpjFornecedor.Text = txtNomeFantasiaFornecedor.Text = cboTipo.Text = "";
+            txtCnpjFornecedor.Text = txtNomeFantasiaFornecedor.Text = txtNascimento.Text = cboTipo.Text = "";
             btnCadastrarFornecedor.Text = "Cadastrar";
             btnDeletarFornecedor.Enabled = false;
             model.ID = 0;
@@ -113,7 +113,8 @@ namespace CadastroFornecedoresGrupoSym
                     model = db.Fornecedor.Where(x => x.ID == model.ID).FirstOrDefault();
                     txtCnpjFornecedor.Text = model.CPF_CNPJ;
                     txtNomeFantasiaFornecedor.Text = model.Nome;
-                    cboTipo.Text = model.Tipo;   
+                    cboTipo.Text = model.Tipo;
+                    txtNascimento.Text =  model.Nascimento.ToString();
                 }
             btnDeletarFornecedor.Enabled = true;
             btnCadastrarFornecedor.Text = "Atualizar";
@@ -178,7 +179,9 @@ namespace CadastroFornecedoresGrupoSym
                 txtCnpjFornecedor.BackColor = colorValidated;
                 btnCadastrarFornecedor.Enabled = true;
                 cboTipo.Text = "PJ";
+                txtNascimento.Visible = lbNascimento.Visible = false;
                 return cboTipo.Text;
+                
             }
            
             else
@@ -186,8 +189,8 @@ namespace CadastroFornecedoresGrupoSym
                 txtCnpjFornecedor.Mask = "";
                 txtCnpjFornecedor.BackColor = colorInvalidated;
                 cboTipo.Text = "";
-                lbNascimento.Visible = false;
-                txtNascimento.Visible = false;
+                
+                txtNascimento.Visible = lbNascimento.Visible = false;
                 return null;
 
             }
@@ -198,13 +201,6 @@ namespace CadastroFornecedoresGrupoSym
             txtCnpjFornecedor.Mask = "";
             txtCnpjFornecedor.SelectionStart = txtCnpjFornecedor.TextLength;
             txtCnpjFornecedor.SelectionLength = 0;
-        }
-
-        private void TxtNascimento_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
-
-         
         }
 
         private void txtCnpjFornecedor_KeyPress(object sender, KeyPressEventArgs e)
@@ -221,7 +217,7 @@ namespace CadastroFornecedoresGrupoSym
             validaCPF_CNPJ();
         }
 
-        private void txtNascimento_KeyUp(object sender, KeyEventArgs e)
+        private void txtNascimento_TextChanged(object sender, EventArgs e)
         {
             if (funcoesDoSistema.ValidaIdade(txtNascimento.Text.Trim()))
             {
@@ -232,7 +228,6 @@ namespace CadastroFornecedoresGrupoSym
                 txtNascimento.BackColor = colorInvalidated;
             }
         }
-
     }
 
     }

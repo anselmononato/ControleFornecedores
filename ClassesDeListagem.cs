@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace CadastroFornecedoresGrupoSym
 {
 
-    public class ClasseFornecedor
+    public class ClassesDeListagem
     {
 
 
@@ -26,7 +26,24 @@ namespace CadastroFornecedoresGrupoSym
             set { _NomeFornecedor = value; }
         }
     }
+    public class ClasseEmpresa
+    {
 
 
+        private int _IdEmpresa;
+        private string _NomeEmpresa;
+
+        public int Value
+        {
+            get { return _IdEmpresa; }
+            set { _IdEmpresa = value; }
+        }
+
+        public String Names
+        {
+            get { return _NomeEmpresa; }
+            set { _NomeEmpresa = value; }
+        }
+    }
 
 }
